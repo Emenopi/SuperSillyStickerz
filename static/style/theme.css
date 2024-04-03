@@ -43,15 +43,22 @@ html {
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block; }
 
+sidebar {
+  color: #ffffff; 
+}
+
 body {
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #888;
+  color: #efeced;
   text-align: left;
-  background-color: #fff; }
+  background-color: #ce64b2;
+  display: flex;
+  flex-direction: column;
+  margin-top: 142px;
+  }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
   outline: 0 !important; }
@@ -292,7 +299,7 @@ h1, h2, h3, h4, h5, h6,
   margin-bottom: 0.5rem;
   font-weight: 500;
   line-height: 1.2;
-  color: #5a5a5a; }
+  color: #000; }
 
 h1, .h1 {
   font-size: 2.5rem; }
@@ -498,8 +505,10 @@ pre {
 .col-xl-auto {
   position: relative;
   width: 100%;
+  height: 100vh;
   padding-right: 15px;
-  padding-left: 15px; }
+  padding-left: 15px;
+  padding-top: 15px;}
 
 .col {
   flex-basis: 0;
@@ -4683,7 +4692,11 @@ a.close.disabled {
   vertical-align: text-top !important; }
 
 .bg-primary {
-  background-color: #ce64b2 !important; }
+  background-color: #d63384 !important; }
+
+.bg-grey {
+  background-color: #dbdbdb !important;
+}
 
 a.bg-primary:hover, a.bg-primary:focus,
 button.bg-primary:hover,
@@ -4739,7 +4752,7 @@ button.bg-light:focus {
   background-color: #dae0e5 !important; }
 
 .bg-dark {
-  background-color: #343a40 !important; }
+  background-color: #5a5a5a !important; }
 
 a.bg-dark:hover, a.bg-dark:focus,
 button.bg-dark:hover,
@@ -7159,7 +7172,7 @@ a.text-dark:hover, a.text-dark:focus {
     border-color: #eceeef; } }
 
 .bg-dark {
-  background-color: #7aeb98 !important; }
+  background-color: #5a5a5a !important; }
 
 .border-dark {
   border-color: #7aeb98 !important; }
