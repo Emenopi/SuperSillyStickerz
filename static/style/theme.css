@@ -3068,6 +3068,7 @@ input[type="button"].btn-block {
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
   margin-right: 4rem;
+  margin-left: 4rem;
   font-size: 1.25rem;
   line-height: inherit;
   white-space: nowrap; }
@@ -4692,7 +4693,7 @@ a.close.disabled {
   vertical-align: text-top !important; }
 
 .bg-primary {
-  background-color: #d63384 !important; }
+  background-color: #f178b4 !important; }
 
 .bg-grey {
   background-color: #dbdbdb !important;
