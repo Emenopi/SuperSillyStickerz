@@ -6,6 +6,6 @@ from stickerz import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('/', include('stickerz.urls')),
+    path('stickerz/', include('stickerz.urls')),
     path('admin/', admin.site.urls),
 ]
