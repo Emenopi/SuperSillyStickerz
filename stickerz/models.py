@@ -2,11 +2,11 @@ from django.db import models
 from django.utils.text import slugify
 
 class Sticker(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=40)
     image = models.ImageField(upload_to='sticker_images')
     price = models.DecimalField(max_digits=5, decimal_places=2)
-    finish = models.CharField(max_length=100)
-    category = models.CharField(max_length=100)
+    finish = models.CharField(max_length=40)
+    category = models.CharField(max_length=40)
     sticker_slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
