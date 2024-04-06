@@ -1,3 +1,5 @@
 from django.contrib import admin
+from stickerz.models import Shopper, Sticker
 
-# Register your models here.
+admin.site.register(Shopper)
+admin.site.register(Sticker)
