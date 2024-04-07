@@ -1,0 +1,110 @@
+{% extends 'stickerz/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Custom Stickers!
+{% endblock %}
+
+{% block body_block %}
+    <h1> Add your custom Sticker here! </h1>
+    <div>
+        <form id="custom_sticker_form" method="post" action="{% url 'stickerz:custom_sticker' %}" enctype="multipart/form-data">
+            <div class="upload-input">
+                <div class="upload-box" onclick="triggerFileInput()">
+                    <div class="upload-box-text">Upload photo</div>
+                </div>
+                <input type="file" class="file-input" onchange="displayPhoto(this)" accept="image/*">
+                <div class="uploaded-image-placeholder"></div>
+            </div>
+            
+            
+
+            <br><br>
+            <select id="size" name="size">
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+            </select><br><br>
+            <input type="number" id="quantity" name="quantity" min="1" value="1" /><br><br>
+            <input type="submit" name="submit" value="Purchase" /><br><br>
+        </form>
+    </div>
+
+    <style>
+    .upload-input {
+        position: relative;
+        width: 250px;
+        height: 250px;
+        border: 2px dashed #dbdbdb;
+        border-radius: 8px;
+        overflow: hidden;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .upload-box {
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        position: relative; 
+    }
+    
+    .upload-box-text {
+        position: absolute;
+        top: 50%; 
+        left: 50%; 
+        transform: translate(-50%, -50%); 
+
+    }
+
+    .file-input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+    }
+    
+    .uploaded-image-placeholder {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .uploaded-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block; 
+    }
+    
+    </style>
+
+    <script>
+
+        function triggerFileInput() {
+            document.querySelector('.file-input').click();
+        }
+    </script>
+    <script>
+        function displayPhoto(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+            reader.onload = function (e) {
+
+                var uploadBox = document.querySelector('.upload-box');
+
+
+                uploadBox.style.backgroundImage = "url('" + e.target.result + "')";
+                uploadBox.style.backgroundSize = "cover";
+                uploadBox.style.backgroundPosition = "center";
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+}
+
+    </script>
+{% endblock %}

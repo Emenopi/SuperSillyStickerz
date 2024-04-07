@@ -22,13 +22,13 @@
             <nav class="navbar navbar-expand-md navbar-light fixed-top bg-grey">
                 <img src="{% static '/images/logoS.png' %}" height="50px" />
                 <a class="navbar-brand p-2" href="{% url 'stickerz:index' %}">Home</a>
+                <a class="navbar-brand p-2" href="{% url 'stickerz:custom_sticker' %}">Custom Sticker</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'stickerz:index' %}">Home</a></li>
                     </ul>
                 </div>
             </nav>
@@ -39,14 +39,7 @@
                 <nav class="col-md-2 d-none d-md-block sidebar">
                     <div class="sidebar-sticky">
                     {% block sidebar_block %}
-                    <h4>CATEGORIES</h4>
-                    <ul>
-                        <li>Animals</li>
-                        <li>Pop Stars</li>
-                        <li>Nature</li>
-                        <li>Landmarks</li>
-                        <li>Brands</li>
-                    </ul>
+                    
                     {% endblock %}
                     </div>
                 </nav>

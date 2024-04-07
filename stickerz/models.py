@@ -10,6 +10,7 @@ class Sticker(models.Model):
     finish = models.CharField(max_length=40)
     category = models.CharField(max_length=40)
     sticker_slug = models.SlugField(unique=True)
+    sticker_id = models.AutoField(primary_key=True)
 
     def save(self, *args, **kwargs):
         sticker_slug = slugify(self.name)
@@ -23,6 +24,8 @@ class Shopper(models.Model):
     # Links UserProfile to a User model instance.
     # includes username, password, email, firstname, & lastname
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    website = models.URLField(blank=True)
+    customSticker = models.ImageField(upload_to='custom_sticker_images', blank=True)
 
     # primary key ID is built in
 
@@ -65,3 +68,12 @@ class Shopper(models.Model):
             self.cvv = make_password(self.cvv)
         # save after encryption
         super(Shopper, self).save(*args, **kwargs)
+
+class Order(models.Model):
+    shopper = models.ForeignKey(Shopper, on_delete=models.CASCADE)
+    status = models.CharField(max_length=64)
+    sticker = models.ForeignKey(Sticker, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    timePlaced = models.DateTimeField(auto_now_add=True)
+
+
