@@ -5,4 +5,5 @@ app_name = 'stickerz'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('custom_sticker/', views.custom_sticker, name='custom_sticker')
 ]
