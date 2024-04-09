@@ -10,7 +10,6 @@ class Sticker(models.Model):
     finish = models.CharField(max_length=40)
     category = models.CharField(max_length=40)
     sticker_slug = models.SlugField(unique=True)
-    sticker_id = models.AutoField(primary_key=True)
 
     def save(self, *args, **kwargs):
         sticker_slug = slugify(self.name)
