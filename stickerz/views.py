@@ -17,3 +17,13 @@ def custom_sticker(request):
     context_dict['title'] = "Super Silly Stickerz!"
     response = render(request, 'stickerz/custom_sticker.html', context=context_dict)
     return response
+
+def user_login(request):
+    context_dict = {}
+    response = render(request, 'stickerz/login.html', context=context_dict)
+    return response
+
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('stickerz:index'))
+

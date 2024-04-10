@@ -8,3 +8,4 @@ class CustomStickerForm(forms.ModelForm):
     class Meta:
         model = Shopper
         fields = ('website', 'picture',)
+
