@@ -48,6 +48,18 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   flex-direction: row;
 }
 
+.register-row {
+  justify-content: center;
+}
+
+.vert-divider {
+  border-right: #fff;
+  border-style: solid;
+  border-radius: 5rem;
+  border-width: 2px;
+  margin-right: 50px;
+}
+
 .sidebar {
   color: #ffffff; 
 }
