@@ -308,37 +308,142 @@ def populate_users():
             "sName" : "lover"
         }
     userThree =  {
-            'username': 'omgstickers',
-            'password': "2983hdfnk",
-            'email': "omgstickerz@stickers.com",
-            "fName" : "omg",
-            "sName" : "stickers"
+            'username': 'mattyBarr',
+            'password': "238ind35",
+            'email': "mattBar@mattBarrFanClub.com",
+            "fName" : "Matt",
+            "sName" : "Barr"
         }
     userFour = {
+            'username': 'omgstickers',
+            'password': "2983hdfnk",
+            'email': "DSomerville@mattBarrFanClub.com",
+            "fName" : "derek",
+            "sName" : "somerville"
+        }
+    userFive = {
             'username': 'wowstickerzzz',
             'password': "2398nsjf21",
             'email': "wow@stickers.com",
             "fName" : "wow",
             "sName" : "stickazz"
         }
+    shopperOne = {
+            'shipfName': "sticker",
+            'shiplName': "gal",
+            "shipAddress" : "123 sticker st",
+            "shipCountry" : "Belgium",
+            "shipPostcode": "BE12 1GM",
+            "billfName": "sticker",
+            "billsName": "gal",
+            "billAddress" : "123 sticker st",
+            "billCountry" : "Belgium",
+            "billPostcode": "BE12 1GM",
+            "cardno": "1234567812341234",
+            "exp": "0924",
+            "cvv": "123"
+
+        }
+    shopperTwo = {
+            'shipfName': "sticker",
+            'shiplName': "crazy",
+            "shipAddress" : "47 crazy rd",
+            "shipCountry" : "France",
+            "shipPostcode": "PA92 7RS",
+            "billfName": "crazy",
+            "billsName": "lady",
+            "billAddress" : "38 stuck cresc",
+            "billCountry" : "Germany",
+            "billPostcode": "LP87 9ZG",
+            "cardno": "8475927465937485",
+            "exp": "0527",
+            "cvv": "485"
+
+        }
+    shopperThree = {
+            'shipfName': "derek",
+            'shiplName': "somerville",
+            "shipAddress" : "1 derek rd",
+            "shipCountry" : "Scotland",
+            "shipPostcode": "G5 8DS",
+            "billfName": "matt",
+            "billsName": "barr",
+            "billAddress" : "12 matt st",
+            "billCountry" : "Scotland",
+            "billPostcode": "G1 1MT",
+            "cardno": "9274659847472882",
+            "exp": "1029",
+            "cvv": "384"
+
+        }
+    shopperFour = {
+            'shipfName': "derek",
+            'shiplName': "somerville",
+            "shipAddress" : "1 derek rd",
+            "shipCountry" : "Scotland",
+            "shipPostcode": "G5 8DS",
+            "billfName": "derek",
+            "billsName": "somerville",
+            "billAddress" : "1 derek rd",
+            "billCountry" : "Scotland",
+            "billPostcode": "G5 8DS",
+            "cardno": "3744766492837404",
+            "exp": "1228",
+            "cvv": "387"
+
+        }
+    shopperFive = {
+            'shipfName': "wim",
+            'shiplName': "vanderbauwheder",
+            "shipAddress" : "13 wim pass",
+            "shipCountry" : "Nederlands",
+            "shipPostcode": "AM22 8DM",
+            "billfName": "wim",
+            "billsName": "vvanderbauwheder",
+            "billAddress" : "13 wim pass",
+            "billCountry" : "Nederlands",
+            "billPostcode": "AM22 8DM",
+            "cardno": "3746583920383747",
+            "exp": "0826",
+            "cvv": "384"
+
+        }
     users = {
-        '1': {'data': userOne},
-        '2': {'data': userTwo},
-        '3': {'data': userThree},
-        '4': {'data': userFour}
+        '1': {'data': userOne, 'shopper': shopperOne},
+        '2': {'data': userTwo, 'shopper': shopperTwo},
+        '3': {'data': userThree, 'shopper': shopperThree},
+        '4': {'data': userFour, 'shopper': shopperFour},
+        '5': {'data': userFive, 'shopper': shopperFive}
     }
 
     for user, user_data in users.items():
-        print(user)
         data = user_data['data']
-        print(data['password'])
+        shopper = user_data['shopper']
         add_user(data['username'], data['password'], data['email'], data['fName'], data['sName'])
+        add_shopper(data['username'], shopper)
 
 def add_sticker(stickerCat, stickerName, stickerPrice, stickerFinish):
     stickerPrice = decimal.Decimal(float(stickerPrice))
     sticker = Sticker.objects.get_or_create(name=stickerName, category=stickerCat, price=stickerPrice, finish=stickerFinish)[0]
     sticker.save()
     return sticker
+
+def add_shopper(username, shopperData):
+    user = User.objects.get(username=username)
+    shopper = Shopper.objects.get_or_create(user=user, shippingFName=shopperData['shipfName'],
+                                            shippingLName=shopperData['shiplName'],
+                                            shippingAddress=shopperData['shipAddress'],
+                                            shippingCountry=shopperData['shipCountry'],
+                                            shippingPostcode=shopperData['shipPostcode'],
+                                            billingFName=shopperData['billfName'],
+                                            billingLName=shopperData['billsName'],
+                                            billingAddress=shopperData['billAddress'],
+                                            billingCountry=shopperData['billCountry'],
+                                            billingPostcode=shopperData['billPostcode'],
+                                            cardNo=shopperData['cardno'],
+                                            expiration=shopperData['exp'],
+                                            cvv=shopperData['cvv'])
+    return shopper
 
 def add_user(name, password, email, fName, sName):
     user = User.objects.get_or_create(username=name, password=password, email=email, first_name=fName, last_name=sName)
