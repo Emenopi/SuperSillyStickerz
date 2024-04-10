@@ -12,7 +12,8 @@ class Sticker(models.Model):
     sticker_slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
-        self.sticker_slug = slugify(self.name)
+        slug = slugify(self.name) + "_" + self.finish
+        self.sticker_slug = slug
         super(Sticker, self).save(*args, **kwargs)
         # Modified save function to update sticker_slug to be the slugified name of the sticker
 
