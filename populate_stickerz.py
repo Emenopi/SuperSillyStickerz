@@ -12,8 +12,8 @@ import dateutil.parser
 
 def populate():
     populate_stickers()
-    # populate_users()
-    # populate_orders()
+    populate_users()
+    populate_orders()
 
 def populate_stickers():
     catStickers = [
@@ -352,9 +352,9 @@ def populate_stickers():
     for stickercat, sticker_data in stickers.items():
         print(stickercat)
         for item in sticker_data['items']:
-            add_sticker(stickercat, item['name'], item['price'], "Matte", item['image'])
-            add_sticker(stickercat, item['name'], item['price'], "Gloss", item['image'])
-            add_sticker(stickercat, item['name'], item['price'], "Holo", item['image'])
+            add_sticker(stickercat, item['name'], item['price'], item['image'])
+            add_sticker(stickercat, item['name'], item['price'], item['image'])
+            add_sticker(stickercat, item['name'], item['price'], item['image'])
 
 def populate_users():
     userOne = {
@@ -543,10 +543,10 @@ def populate_orders():
         shopper = data['username']
         add_order(shopper, data)
 
-def add_sticker(stickerCat, stickerName, stickerPrice, stickerFinish, stickerImage):
+def add_sticker(stickerCat, stickerName, stickerPrice, stickerImage):
     stickerPrice = decimal.Decimal(float(stickerPrice))
     image = os.path.join('/sticker_images', stickerImage)
-    sticker = Sticker.objects.get_or_create(name=stickerName, category=stickerCat, price=stickerPrice, finish=stickerFinish, image=image)[0]
+    sticker = Sticker.objects.get_or_create(name=stickerName, category=stickerCat, price=stickerPrice, image=image)[0]
     sticker.save()
     return sticker
 
@@ -572,13 +572,14 @@ def add_order(username, orderData):
     print("adding ", username, "'s Order")
     user = User.objects.get(username=username)
     shopper = Shopper.objects.get(user=user)
-    sticker = Sticker.objects.get(name=orderData['sticker'], finish=orderData['finish'])
+    sticker = Sticker.objects.get(name=orderData['sticker'])
     time = dateutil.parser.parse(orderData['time'])
     order = Order.objects.get_or_create(shopper=shopper,
                                         status=orderData['status'],
                                         sticker=sticker,
                                         quantity=orderData['quantity'],
-                                        timePlaced=time
+                                        timePlaced=time,
+                                        finish=orderData['finish']
                                         )
     return order
 
