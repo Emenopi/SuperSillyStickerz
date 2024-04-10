@@ -41,11 +41,11 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
-  display: flex !important; }
+  display: block }
 
 .login {
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  flex-direction: row;
 }
 
 .sidebar {
