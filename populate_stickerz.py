@@ -7,10 +7,12 @@ django.setup()
 from stickerz.models import Shopper, Sticker, Order
 from django.contrib.auth.models import User
 import decimal
+import dateutil.parser
 
 def populate():
     populate_stickers()
     populate_users()
+    populate_orders()
 
 def populate_stickers():
     catStickers = [
@@ -408,6 +410,7 @@ def populate_users():
             "cvv": "384"
 
         }
+    
     users = {
         '1': {'data': userOne, 'shopper': shopperOne},
         '2': {'data': userTwo, 'shopper': shopperTwo},
@@ -422,6 +425,62 @@ def populate_users():
         add_user(data['username'], data['password'], data['email'], data['fName'], data['sName'])
         add_shopper(data['username'], shopper)
 
+
+def populate_orders():
+    orderOne = {
+        'username': 'mattyBarr',
+        'status': 'Processing',
+        'sticker': 'Matt',
+        'finish': 'Matte',
+        'quantity': 50,
+        'time': '2024-04-05 09:43:56-15'
+    }
+    orderTwo = {
+        'username': 'mattyBarr',
+        'status': 'Delivered',
+        'sticker': 'Derek',
+        'finish': 'Gloss',
+        'quantity': 30,
+        'time': '2024-03-29 12:15:32-03'
+    }
+    orderThree = {
+        'username': 'omgstickers',
+        'status': 'Dispatched',
+        'sticker': 'Shoe Addict',
+        'finish': 'Holo',
+        'quantity': 15,
+        'time': '2024-03-10 08:23:12-08'
+    }
+    orderFour = {
+        'username': 'stickergal1',
+        'status': 'Delivered',
+        'sticker': 'Paris',
+        'finish': 'Gloss',
+        'quantity': 5,
+        'time': '2024-03-15 08:10:10-20'
+    }
+    orderFive = {
+        'username': 'wowstickerzzz',
+        'status': 'Processing',
+        'sticker': 'Skateboard Heart',
+        'finish': 'Matte',
+        'quantity': 12,
+        'time': '2024-04-10 13:23:15-13'
+    }
+
+    orders = {
+        '1': {'data': orderOne},
+        '2': {'data': orderTwo},
+        '3': {'data': orderThree},
+        '4': {'data': orderFour},
+        '5': {'data': orderFive}
+    }
+
+    for order, order_data in orders.items():
+        data = order_data['data']
+        shopper = data['username']
+        add_order(shopper, data)
+
 def add_sticker(stickerCat, stickerName, stickerPrice, stickerFinish):
     stickerPrice = decimal.Decimal(float(stickerPrice))
     sticker = Sticker.objects.get_or_create(name=stickerName, category=stickerCat, price=stickerPrice, finish=stickerFinish)[0]
@@ -429,6 +488,7 @@ def add_sticker(stickerCat, stickerName, stickerPrice, stickerFinish):
     return sticker
 
 def add_shopper(username, shopperData):
+    print("Adding shopper: ", username)
     user = User.objects.get(username=username)
     shopper = Shopper.objects.get_or_create(user=user, shippingFName=shopperData['shipfName'],
                                             shippingLName=shopperData['shiplName'],
@@ -444,6 +504,21 @@ def add_shopper(username, shopperData):
                                             expiration=shopperData['exp'],
                                             cvv=shopperData['cvv'])
     return shopper
+
+def add_order(username, orderData):
+    print("adding ", username, "'s Order")
+    user = User.objects.get(username=username)
+    shopper = Shopper.objects.get(user=user)
+    sticker = Sticker.objects.get(name=orderData['sticker'], finish=orderData['finish'])
+    time = dateutil.parser.parse(orderData['time'])
+    order = Order.objects.get_or_create(shopper=shopper,
+                                        status=orderData['status'],
+                                        sticker=sticker,
+                                        quantity=orderData['quantity'],
+                                        timePlaced=time
+                                        )
+    return order
+
 
 def add_user(name, password, email, fName, sName):
     user = User.objects.get_or_create(username=name, password=password, email=email, first_name=fName, last_name=sName)
