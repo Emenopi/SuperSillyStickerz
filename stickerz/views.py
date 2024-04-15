@@ -21,6 +21,7 @@ def custom_sticker(request):
     return response
 
 def user_login(request):
+    register_form = RegisterForm(request.POST, prefix='register')
     if request.method == 'POST':
         if 'login' in request.POST:
             

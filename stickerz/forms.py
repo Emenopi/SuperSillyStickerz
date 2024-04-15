@@ -6,7 +6,7 @@ class CustomStickerForm(forms.ModelForm):
     #image = forms.ImageField()
     class Meta:
         model = Shopper
-        fields = ('website', 'picture',)
+        fields = ('website', 'customSticker',)
 
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
