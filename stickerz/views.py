@@ -5,6 +5,8 @@ from django import forms
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from stickerz.forms import RegisterForm
+
 
 def index(request):
     context_dict = {}
@@ -19,9 +21,35 @@ def custom_sticker(request):
     return response
 
 def user_login(request):
-    context_dict = {}
-    response = render(request, 'stickerz/login.html', context=context_dict)
-    return response
+    if request.method == 'POST':
+        if 'login' in request.POST:
+            
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(username=username, password=password)   
+
+            if user:
+                login(request, user)
+                return redirect(reverse('stickerz:index'))
+            else:
+                print(f"Invalid login details: {username}, {password}")
+
+        elif 'register' in request.POST:
+            register_form = RegisterForm(request.POST, prefix='register')
+            if register_form.is_valid():
+                user = register_form.save()
+                user.set_password(user.password)
+                user.save()
+                user = authenticate(username=username, password=password)
+                login(request, user)
+                return redirect(reverse('stickerz:index'))   
+        else:
+            register_form = RegisterForm(prefix='register')
+     
+    
+    return render(request, 'stickerz/login.html', context={
+                                                            'register_form': register_form,
+                                                        })
 
 def user_logout(request):
     logout(request)

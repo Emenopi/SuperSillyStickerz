@@ -1,11 +1,20 @@
 from django import forms
-from stickerz.models import Sticker, Shopper, Customise
+from stickerz.models import Sticker, Shopper
 from django.contrib.auth.models import User
-from stickerz import Shopper
 
 class CustomStickerForm(forms.ModelForm):
     #image = forms.ImageField()
     class Meta:
         model = Shopper
         fields = ('website', 'picture',)
+
+class RegisterForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+ 
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password')
+
+
+
 
