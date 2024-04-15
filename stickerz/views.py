@@ -21,7 +21,7 @@ def custom_sticker(request):
     return response
 
 def user_login(request):
-    register_form = RegisterForm(request.POST, prefix='register')
+    register_form = RegisterForm(request.POST)
     if request.method == 'POST':
         if 'login' in request.POST:
             
@@ -36,7 +36,9 @@ def user_login(request):
                 print(f"Invalid login details: {username}, {password}")
 
         elif 'register' in request.POST:
-            register_form = RegisterForm(request.POST, prefix='register')
+            register_form = RegisterForm(request.POST)
+            username = request.POST.get('username')
+            password = request.POST.get('password')
             if register_form.is_valid():
                 user = register_form.save()
                 user.set_password(user.password)
@@ -45,7 +47,7 @@ def user_login(request):
                 login(request, user)
                 return redirect(reverse('stickerz:index'))   
         else:
-            register_form = RegisterForm(prefix='register')
+            register_form = RegisterForm()
      
     
     return render(request, 'stickerz/login.html', context={
