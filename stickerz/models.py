@@ -5,14 +5,13 @@ from django.contrib.auth.hashers import make_password
 
 class Sticker(models.Model):
     name = models.CharField(max_length=40)
-    image = models.ImageField(upload_to='sticker_images')
+    image = models.ImageField(upload_to='sticker_images', blank=True)
     price = models.DecimalField(max_digits=5, decimal_places=2)
-    finish = models.CharField(max_length=40)
     category = models.CharField(max_length=40)
     sticker_slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
-        sticker_slug = slugify(self.name)
+        self.sticker_slug = slugify(self.name)
         super(Sticker, self).save(*args, **kwargs)
         # Modified save function to update sticker_slug to be the slugified name of the sticker
 
@@ -72,6 +71,7 @@ class Order(models.Model):
     shopper = models.ForeignKey(Shopper, on_delete=models.CASCADE)
     status = models.CharField(max_length=64)
     sticker = models.ForeignKey(Sticker, on_delete=models.CASCADE)
+    finish = models.CharField(max_length=40)
     quantity = models.IntegerField()
     timePlaced = models.DateTimeField(auto_now_add=True)
 
