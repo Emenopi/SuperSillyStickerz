@@ -8,6 +8,12 @@ class CustomStickerForm(forms.ModelForm):
         model = Shopper
         fields = ('website', 'customSticker',)
 
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+    class Meta:
+        model = User
+        fields = ('username', 'password',)
+
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
  
@@ -22,18 +28,13 @@ class ShippingForm(forms.ModelForm):
                   'shippingAddress', 'shippingCountry',
                   'shippingPostcode')
         
-class BillingFormFull(forms.ModelForm):
+class BillingForm(forms.ModelForm):
     class Meta:
         model = Shopper
         fields = ('billingFName',
                   'billingLName', 'billingAddress',
                   'billingCountry', 'billingPostcode',
                   'cardNo', 'expiration', 'cvv')
-        
-class BillingForm_cardOnly(forms.ModelForm):
-    class Meta:
-        model = Shopper
-        fields = ('cardNo', 'expiration', 'cvv')
 
 
 

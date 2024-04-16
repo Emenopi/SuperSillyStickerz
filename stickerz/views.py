@@ -5,7 +5,8 @@ from django import forms
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from stickerz.forms import RegisterForm, BillingFormFull, BillingForm_cardOnly, ShippingForm
+from stickerz.forms import RegisterForm, BillingForm, ShippingForm, UserForm
+from stickerz.models import Shopper
 
 
 def index(request):
@@ -21,8 +22,40 @@ def custom_sticker(request):
     return response
 
 def billing(request):
-    billing_form = BillingFormFull()
-    response = render(request, 'sitckerz/billing.html')
+    billing_form = BillingForm()
+    shipping_form = ShippingForm()
+    
+    # if request.method =='POST':
+    #     if billing_form.is_valid():
+    #         billing_info = billing_form.save(commit=False)
+    #     else:
+    #         return HttpResponse(billing_form.errors)
+    #     if shipping_form.is_valid():
+    #         shipping_info = shipping_form.save(commit=False)
+    #     else:
+    #         return HttpResponse(shipping_form.errors)
+    #     shopper = Shopper.objects.get_or_create(user=request.user)
+    #     shopper.shippingFName = shipping_form.shippingFName
+    #     shopper.shippingLName = shipping_form.shippingLName
+    #     shopper.shippingAddress = shipping_form.shippingAddress
+    #     shopper.shippingCountry = shipping_form.shippingCountry
+    #     shopper.shippingPostcode = shipping_form.shippingPostcode
+
+    #     shopper.billingFName = billing_form.billingFName
+    #     shopper.billingLName = billing_form.billingLName
+    #     shopper.billingAddress = billing_form.billingAddress
+    #     shopper.billingCountry = billing_form.billingCountry
+    #     shopper.billingPostcode = billing_form.billingPostcode
+    #     shopper.cardNo = billing_form.cardNo
+    #     shopper.expiration = billing_form.expiration
+    #     shopper.cvv = billing_form.cvv
+    #     shopper.save()
+    #     return redirect(reverse('stickerz:index'))
+
+    response = render(request, 'sitckerz/billing.html', context={
+                                                            'shipping_form': shipping_form,
+                                                            'billing_form': billing_form
+                                                        })
     return response
 
 def user_login(request):
@@ -50,7 +83,7 @@ def user_login(request):
                 user.save()
                 user = authenticate(username=username, password=password)
                 login(request, user)
-                return redirect(reverse('stickerz:index'))   
+                return redirect(reverse('stickerz:billing'))   
         else:
             register_form = RegisterForm()
      
