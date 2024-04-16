@@ -8,4 +8,5 @@ urlpatterns = [
     path('custom_sticker/', views.custom_sticker, name='custom_sticker'),
     path('login/', views.user_login, name="login"),
     path('logout/', views.user_logout, name="logout"),
+    path('billing/', views.billing, name="billing"),
 ]

@@ -15,6 +15,26 @@ class RegisterForm(forms.ModelForm):
         model = User
         fields = ('first_name', 'last_name','username', 'email', 'password')
 
+class ShippingForm(forms.ModelForm):
+    class Meta:
+        model = Shopper
+        fields = ('shippingFName', 'shippingLName',
+                  'shippingAddress', 'shippingCountry',
+                  'shippingPostcode')
+        
+class BillingFormFull(forms.ModelForm):
+    class Meta:
+        model = Shopper
+        fields = ('billingFName',
+                  'billingLName', 'billingAddress',
+                  'billingCountry', 'billingPostcode',
+                  'cardNo', 'expiration', 'cvv')
+        
+class BillingForm_cardOnly(forms.ModelForm):
+    class Meta:
+        model = Shopper
+        fields = ('cardNo', 'expiration', 'cvv')
+
 
 
 

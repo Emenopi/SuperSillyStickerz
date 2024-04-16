@@ -5,7 +5,7 @@ from django import forms
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from stickerz.forms import RegisterForm
+from stickerz.forms import RegisterForm, BillingFormFull, BillingForm_cardOnly, ShippingForm
 
 
 def index(request):
@@ -18,6 +18,11 @@ def custom_sticker(request):
     context_dict = {}
     context_dict['title'] = "Super Silly Stickerz!"
     response = render(request, 'stickerz/custom_sticker.html', context=context_dict)
+    return response
+
+def billing(request):
+    billing_form = BillingFormFull()
+    response = render(request, 'sitckerz/billing.html')
     return response
 
 def user_login(request):
