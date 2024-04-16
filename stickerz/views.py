@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from stickerz.models import Sticker
 
-def index(request, category):
+def index(request, category=None):
     context_dict = {}
 
     categories = []
