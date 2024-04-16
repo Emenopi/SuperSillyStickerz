@@ -5,10 +5,28 @@ from django import forms
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from stickerz.models import Sticker
 
-def index(request):
+def index(request, category):
     context_dict = {}
-    context_dict['title'] = "Super Silly Stickerz!"
+
+    categories = []
+
+    stickers = Sticker.objects.all()
+    for sticker in stickers:
+        if sticker.category not in categories and sticker.category!="custom":
+            categories.append(sticker.category)
+        
+
+    context_dict['categories'] = categories
+
+
+    # if no cateogory specified it is the homepage
+    if category == None:
+        context_dict['stickers'] = Sticker.objects.exclude(category="custom") # so users custom stickers arent availiable generally
+    else:
+        context_dict['stickers'] = Sticker.objects.filter(category=category)
+    
     response = render(request, 'stickerz/index.html', context=context_dict)
     return response
 
