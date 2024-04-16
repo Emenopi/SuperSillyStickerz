@@ -52,7 +52,7 @@ def billing(request):
     #     shopper.save()
     #     return redirect(reverse('stickerz:index'))
 
-    response = render(request, 'sitckerz/billing.html', context={
+    response = render(request, 'stickerz/billing.html', context={
                                                             'shipping_form': shipping_form,
                                                             'billing_form': billing_form
                                                         })
