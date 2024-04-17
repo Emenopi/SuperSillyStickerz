@@ -33,7 +33,7 @@ def index(request, category=None):
 def sticker(request, sticker_slug):
     context_dict = {}
     try:
-        category = Sticker.objects.get(slug=sticker_slug)
+        category = Sticker.objects.get(sticker_slug=sticker_slug)
         context_dict['category'] = category
     except Sticker.DoesNotExist:
         context_dict['blah'] = None

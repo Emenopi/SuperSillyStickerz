@@ -19,7 +19,7 @@ Home
 <div class="grid-container">
     {% for sticker in stickers %}
     <div class=""> <!--replace with acc url-->
-        <a  href="{% url 'stickerz:sticker' sticker.sticker_slug %}/">
+        <a  href="{% url 'stickerz:sticker' sticker.sticker_slug %}">
         <img class="sticker-img" src="{{ MEDIA_URL }}{{ sticker.image }}" alt="{{ stickers.name}}" /> <br>
         {{sticker.name}}{{sticker.price}}</a>
     </div>
