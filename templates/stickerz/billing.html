@@ -12,8 +12,7 @@ Login/Register
         <h1>Shipping Info</h1>
         <form id="shipping_form" method="post" action="{% url 'stickerz:billing' %}">
             {% csrf_token %}
-            {{ shipping_form.as_p }}
-            {{ billing_form.as_p }}
+            {{ shopper_form.as_p }}
             <input type="submit" name="shipping" />
         </form>
     </div>

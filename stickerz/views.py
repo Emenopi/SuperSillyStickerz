@@ -5,7 +5,7 @@ from django import forms
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from stickerz.forms import RegisterForm, BillingForm, ShippingForm, UserForm
+from stickerz.forms import RegisterForm, ShopperForm, UserForm
 from stickerz.models import Shopper
 
 
@@ -23,33 +23,26 @@ def custom_sticker(request):
 
 def billing(request):
 
-    shipping_form = ShippingForm()
-    billing_form = BillingForm()
-    
+    shopper_form = ShopperForm(request.POST)
     if request.method =='POST':
-        if billing_form.is_valid() and shipping_form.is_valid():
-            shopper = Shopper.objects.get_or_create(user=request.user)
-            shopper.shippingFName = shipping_form.shippingFName
-            shopper.shippingLName = shipping_form.shippingLName
-            shopper.shippingAddress = shipping_form.shippingAddress
-            shopper.shippingCountry = shipping_form.shippingCountry
-            shopper.shippingPostcode = shipping_form.shippingPostcode
-            shopper.billingFName = billing_form.billingFName
-            shopper.billingLName = billing_form.billingLName
-            shopper.billingAddress = billing_form.billingAddress
-            shopper.billingCountry = billing_form.billingCountry
-            shopper.billingPostcode = billing_form.billingPostcode
-            shopper.cardNo = billing_form.cardNo
-            shopper.expiration = billing_form.expiration
-            shopper.cvv = billing_form.cvv
+        if shopper_form.is_valid():
+            shopper = shopper_form.save(commit=False)
+            shopper.user = User.objects.get(username=request.user.username)
             shopper.save()
+
+            # print("valid")
+            # shopper_form.save()
+            # currentuser = User.objects.get(username=request.user.username)
+            # shopper = Shopper.objects.create(user=currentuser)
+            # shopper.user = request.user
+            # shopper.save()
             return redirect(reverse('stickerz:index'))
         else:
-            return HttpResponse(billing_form.errors, shipping_form.errors)
+            print("invalid shopping")
+            return print(shopper_form.errors)
 
     response = render(request, 'stickerz/billing.html', context={
-                                                            'shipping_form': shipping_form,
-                                                            'billing_form': billing_form
+                                                            'shopper_form': shopper_form,
                                                        })
     return response
 
