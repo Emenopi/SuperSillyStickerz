@@ -6,8 +6,13 @@
 {% endblock %}
 
 {% block body_block %}
-<img class="sticker-img" src="{{ MEDIA_URL }}{{ sticker.image }}" alt="{{ sticker.name}}" /> <br>
-{{sticker.name}} <br>
-{{sticker.price}}
-
+    <img class="sticker-img" src="{{ MEDIA_URL }}{{ sticker.image }}" alt="{{ sticker.name}}" /> <br>
+    {{sticker.name}} <br>
+    {{sticker.price}}
+    
+    <form id="shipping_form" method="post" action="{% url 'stickerz:sticker' sticker.sticker_slug %}">
+        {% csrf_token %}
+        {{ order_form.as_p }}
+    <input type="submit" name="purchase">
+    </form>
 {% endblock %}

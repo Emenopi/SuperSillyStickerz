@@ -5,7 +5,7 @@ from django import forms
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from stickerz.forms import RegisterForm, ShopperForm, UserForm
+from stickerz.forms import RegisterForm, ShopperForm, OrderForm
 from stickerz.models import Shopper, Sticker
 
 
@@ -40,6 +40,22 @@ def sticker(request, sticker_slug):
         context_dict['sticker'] = sticker
     except Sticker.DoesNotExist:
         context_dict['sticker'] = None
+
+
+    order_form = OrderForm(request.POST)
+    context_dict['order_form'] = order_form
+    if request.method =='POST':
+        if order_form.is_valid():
+            order = order_form.save(commit=False)
+            order.shopper = Shopper.objects.get(user = User.objects.get(username=request.user.username))
+            order.sticker = sticker
+            order.status = "Processing"
+            order.save()
+            return redirect(reverse('stickerz:index'))
+        else:
+            print("invalid shopping")
+            return print(order_form.errors)
+        
     return render(request, 'stickerz/sticker.html', context=context_dict)
  
 
