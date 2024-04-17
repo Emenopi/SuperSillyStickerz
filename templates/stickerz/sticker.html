@@ -6,6 +6,8 @@
 {% endblock %}
 
 {% block body_block %}
-
+<img class="sticker-img" src="{{ MEDIA_URL }}{{ sticker.image }}" alt="{{ sticker.name}}" /> <br>
+{{sticker.name}} <br>
+{{sticker.price}}
 
 {% endblock %}

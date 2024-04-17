@@ -36,10 +36,10 @@ def index(request, category=None):
 def sticker(request, sticker_slug):
     context_dict = {}
     try:
-        category = Sticker.objects.get(sticker_slug=sticker_slug)
-        context_dict['category'] = category
+        sticker = Sticker.objects.get(sticker_slug=sticker_slug)
+        context_dict['sticker'] = sticker
     except Sticker.DoesNotExist:
-        context_dict['blah'] = None
+        context_dict['sticker'] = None
     return render(request, 'stickerz/sticker.html', context=context_dict)
  
 
