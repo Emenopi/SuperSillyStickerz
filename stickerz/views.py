@@ -29,13 +29,6 @@ def billing(request):
             shopper = shopper_form.save(commit=False)
             shopper.user = User.objects.get(username=request.user.username)
             shopper.save()
-
-            # print("valid")
-            # shopper_form.save()
-            # currentuser = User.objects.get(username=request.user.username)
-            # shopper = Shopper.objects.create(user=currentuser)
-            # shopper.user = request.user
-            # shopper.save()
             return redirect(reverse('stickerz:index'))
         else:
             print("invalid shopping")
