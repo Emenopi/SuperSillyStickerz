@@ -5,13 +5,10 @@ from django import forms
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-<<<<<<< HEAD
 from stickerz.forms import RegisterForm, ShopperForm, UserForm
-from stickerz.models import Shopper
+from stickerz.models import Shopper, Sticker
 
-=======
-from stickerz.models import Sticker
->>>>>>> 089220aab13d1eaf6a5a8d01d0b0c1a3b91599d5
+
 
 def index(request, category=None):
     context_dict = {}
