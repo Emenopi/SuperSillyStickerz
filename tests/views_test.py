@@ -28,6 +28,17 @@ class IndexViewTests(TestCase):
         # check context_dict category is correct
         self.assertContains(response, "kitchen")
 
+    def test_index_view_custom_category(self):
+        # Add sticker to db
+        add_sticker('teapot', 'Custom')
+        # get response
+        response = self.client.get(reverse('stickerz:index'))
+        # check response is successful
+        self.assertEqual(response.status_code, 200)
+        # test no categories in context dict
+        self.assertQuerysetEqual(response.context['categories'], [])
+
+
     def test_index_view_login_link(self):
         # setup request factory
         self.factory = RequestFactory()
