@@ -89,7 +89,7 @@ def populate_stickers():
         {
             'name': 'Heart Dog',
             'price': 1.05,
-            'image': 'heart_dog.jpg'
+            'image': 'heart_dog.png'
         },
         {
             'name': 'Funny Heart',
