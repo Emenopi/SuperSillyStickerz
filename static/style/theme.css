@@ -60,6 +60,20 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   margin-right: 50px;
 }
 
+.sticker-box {
+  border-style: solid;
+  border-radius: 5rem;
+  border-width: 2px;
+  padding: 30px;
+  margin: 20px;
+  width:max-content
+}
+
+.main-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .sidebar {
   color: #ffffff; 
 }
