@@ -1,5 +1,5 @@
 from django import forms
-from stickerz.models import Sticker, Shopper
+from stickerz.models import Sticker, Shopper, Order
 from django.contrib.auth.models import User
 
 class CustomStickerForm(forms.ModelForm):
@@ -32,5 +32,17 @@ class ShopperForm(forms.ModelForm):
                   'billingPostcode', 'cardNo',
                   'expiration', 'cvv')
 
+class OrderForm(forms.ModelForm):
+    CHOICES = (
+        ('matte', 'Matte'),
+        ('gloss', 'Gloss'),
+        ('semi-gloss', 'Semi-gloss'),
+        ('transparent', 'Transparent'),
+        ('holographic', 'Holographic'),
+    )
+    finish = forms.ChoiceField(choices=CHOICES)
+    class Meta:
+        model = Order
+        fields = ('finish', 'quantity')
 
 
