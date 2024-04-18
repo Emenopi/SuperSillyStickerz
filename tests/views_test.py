@@ -25,14 +25,12 @@ class IndexViewTests(TestCase):
         num_categories = len(response.context['categories'])
         self.assertEquals(num_categories, 1)
         # check context_dict category is correct
-        self.assertQuerysetEqual(response.content['categories'], ['kitchen'])
+        self.assertContains(response, "kitchen")
 
 """
     Add one sticker for testing
 """
-def add_sticker(name, category, price=0):
-    sticker = Sticker.objects.get_or_create(name=name)[0]
-    sticker.category = category
-    sticker.price = price
+def add_sticker(name, category, price=1):
+    sticker = Sticker.objects.get_or_create(name=name, category=category, price=price)[0]
     sticker.save()
     return sticker
