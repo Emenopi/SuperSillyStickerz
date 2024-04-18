@@ -20,6 +20,8 @@
     <p>{{ shopper.billingCountry }}</p>
     <p>{{ shopper.billingPostcode }}</p>
 
+    <a href="{% url 'stickerz:edit_billing' %}">edit</a>
+
     <h2>Order History</h2>
     <ul>
         {% for order in orders %}
