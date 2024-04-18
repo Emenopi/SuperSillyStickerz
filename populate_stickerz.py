@@ -553,7 +553,7 @@ def add_sticker(stickerCat, stickerName, stickerPrice, stickerImage):
 def add_shopper(username, shopperData):
     print("Adding shopper: ", username)
     user = User.objects.get(username=username)
-    shopper = Shopper.objects.get_or_create(user=user, shippingFName=shopperData['shipfName'],
+    shopper = Shopper.objects.create(user=user, shippingFName=shopperData['shipfName'],
                                             shippingLName=shopperData['shiplName'],
                                             shippingAddress=shopperData['shipAddress'],
                                             shippingCountry=shopperData['shipCountry'],
