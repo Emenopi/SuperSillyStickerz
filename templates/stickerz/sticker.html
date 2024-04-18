@@ -1,0 +1,25 @@
+{% extends 'stickerz/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Buy This Sticker
+{% endblock %}
+
+{% block body_block %}
+    <img class="sticker-img" src="{{ MEDIA_URL }}{{ sticker.image }}" alt="{{ sticker.name}}" /> <br>
+    {{sticker.name}} <br>
+    {{sticker.price}}
+    
+
+    {% if user.is_authenticated %}
+    <form id="shipping_form" method="post" action="{% url 'stickerz:sticker' sticker.sticker_slug %}">
+                {% else %}
+                <form id="shipping_form" method="post" action="{% url 'stickerz:login' %}">
+                {% endif %}
+    
+        {% csrf_token %}
+        {{ order_form.as_p }}
+        
+    <input type="submit" name="purchase">
+    </form>
+{% endblock %}

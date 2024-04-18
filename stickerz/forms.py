@@ -45,5 +45,17 @@ class ShopperForm(forms.ModelForm):
                   'billingPostcode', 'cardNo',
                   'expiration', 'cvv')
 
+class OrderForm(forms.ModelForm):
+    CHOICES = (
+        ('matte', 'Matte'),
+        ('gloss', 'Gloss'),
+        ('semi-gloss', 'Semi-gloss'),
+        ('transparent', 'Transparent'),
+        ('holographic', 'Holographic'),
+    )
+    finish = forms.ChoiceField(choices=CHOICES)
+    class Meta:
+        model = Order
+        fields = ('finish', 'quantity')
 
 
