@@ -8,25 +8,23 @@ Home
 
     {% block sidebar_block %}
     <h4>CATEGORIES</h4>
-    <ul>
-        <li>Animals</li>
-        <li>People</li>
-        <li>Nature</li>
-        <li>Landmarks</li>
-        <li>Brands</li>
-    </ul>
-    <h4>FINISHES</h4>
-    <ul>
-        <li>Matte</li>
-        <li>Gloss</li>
-        <li>Semi-gloss</li>
-        <li>Transparent</li>
-        <li>Holographic</li>
-    </ul>
+    <ul class="text-dark">
+        {% for category in categories %}
+        <li><a class="text-dark" href="{% url 'stickerz:category' category %}">{{category}}</a></li>
+        {% endfor %}
+        </ul>
     {% endblock %}
 
 {% block body_block %}
-    <h1>{{ title }} </h1>
-    Welcome to Super Silly Stickerz!
-    bella was here
+<div class="grid-container">
+    {% for sticker in stickers %}
+    <div class=""> <!--replace with acc url-->
+        <a  href="{{sticker.sticker_slug}}/">
+        <img class="sticker-img" src="{{ MEDIA_URL }}{{ sticker.image }}" alt="{{ stickers.name}}" /> <br>
+        {{sticker.name}}{{sticker.price}}</a>
+    </div>
+    {% endfor %}
+    
+    </div>
+</div>      
 {% endblock %}

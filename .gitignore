@@ -6,3 +6,14 @@ __pycache__/
 db.sqlite3
 *.key
 thumbs.db
+stickerz/migrations/__pycache__/__init__.cpython-310.pyc
+stickerz/__pycache__/views.cpython-310.pyc
+stickerz/__pycache__/urls.cpython-310.pyc
+stickerz/__pycache__/models.cpython-310.pyc
+stickerz/__pycache__/admin.cpython-310.pyc
+stickerz/__pycache__/__init__.cpython-310.pyc
+db.sqlite3
+SuperSillyStickerz/__pycache__/wsgi.cpython-310.pyc
+SuperSillyStickerz/__pycache__/urls.cpython-310.pyc
+SuperSillyStickerz/__pycache__/settings.cpython-310.pyc
+SuperSillyStickerz/__pycache__/__init__.cpython-310.pyc
