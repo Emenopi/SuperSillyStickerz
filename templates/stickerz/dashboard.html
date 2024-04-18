@@ -1,0 +1,32 @@
+{% extends 'stickerz/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    My Dashboard
+{% endblock %}
+
+{% block body_block %}
+    <h1>Welcome, {{ shopper.user.username }}</h1>
+
+    <h2>Shipping Address</h2>
+    <p>{{ shopper.shippingFName }} {{ shopper.shippingLName }}</p>
+    <p>{{ shopper.shippingAddress }}</p>
+    <p>{{ shopper.shippingCountry }}</p>
+    <p>{{ shopper.shippingPostcode }}</p>
+
+    <h2>Billing Address</h2>
+    <p>{{ shopper.billingFName }} {{ shopper.billingLName }}</p>
+    <p>{{ shopper.billingAddress }}</p>
+    <p>{{ shopper.billingCountry }}</p>
+    <p>{{ shopper.billingPostcode }}</p>
+
+    <a href="{% url 'stickerz:edit_billing' %}">edit</a>
+
+    <h2>Order History</h2>
+    <ul>
+        {% for order in orders %}
+            <li>{{ order.sticker.name }} - {{ order.timePlaced }}</li>
+        {% endfor %}
+    </ul>
+    
+{% endblock %}
