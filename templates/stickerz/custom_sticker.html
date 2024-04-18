@@ -8,7 +8,11 @@
 {% block body_block %}
     <h1> Add your custom Sticker here! </h1>
     <div>
-        <form id="custom_sticker_form" method="post" action="{% url 'stickerz:custom_sticker' %}" enctype="multipart/form-data">
+        {% if user.is_authenticated %}
+            <form id="custom_sticker_form" method="post" action="{% url 'stickerz:custom_sticker' %}" enctype="multipart/form-data">
+        {% else %}
+            <form id="shipping_form" method="post" action="{% url 'stickerz:login' %}">
+        {% endif %}
             {% csrf_token %}
 
             {% for hidden in custom_sticker_form.hidden_fields %}
