@@ -40,8 +40,7 @@ def custom_sticker(request):
     return response
 
 def dashboard(request):
-
-    user = User.objects.first()
+    user = User.objects.get(username=request.user.username)
     shopper = Shopper.objects.get(user=user)
     orders = Order.objects.filter(shopper=shopper)
 
