@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from stickerz.forms import RegisterForm, ShopperForm, OrderForm
-from stickerz.models import Shopper, Sticker
+from stickerz.models import Shopper, Sticker, Order
 
 
 
