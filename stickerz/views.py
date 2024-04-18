@@ -5,8 +5,8 @@ from django import forms
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from stickerz.models import Shopper, Order, Sticker
 from stickerz.forms import RegisterForm, ShopperForm, UserForm
-from stickerz.models import Shopper, Sticker
 
 
 
@@ -38,6 +38,57 @@ def custom_sticker(request):
     context_dict['title'] = "Super Silly Stickerz!"
     response = render(request, 'stickerz/custom_sticker.html', context=context_dict)
     return response
+
+def dashboard(request):
+    user = User.objects.get(username=request.user.username)
+    shopper = Shopper.objects.get(user=user)
+    orders = Order.objects.filter(shopper=shopper)
+
+    context_dict = {}
+    context_dict['shopper'] = shopper
+    context_dict['orders'] = orders 
+    
+    response = render(request, 'stickerz/dashboard.html', context=context_dict)
+    return response
+
+def edit_billing(request):
+    shopper_form = ShopperForm(request.POST)
+    if request.method =='POST':
+        if shopper_form.is_valid():
+            new_shopper = shopper_form.save(commit=False)
+
+            # set known data
+            shopper = Shopper.objects.get(user = request.user)
+            new_shopper.id = shopper.id
+            new_shopper.user = shopper.user
+
+            #set data from form
+            shopper.shippingFName = new_shopper.shippingFName
+            shopper.shippingLName = new_shopper.shippingLName
+            shopper.shippingAddress = new_shopper.shippingAddress
+            shopper.shippingCountry = new_shopper.shippingCountry
+            shopper.shippingPostcode = new_shopper.shippingPostcode
+            shopper.billingFName = new_shopper.billingFName
+            shopper.billingLName = new_shopper.billingLName
+            shopper.billingAddress = new_shopper.billingAddress
+            shopper.billingCountry = new_shopper.billingCountry
+            shopper.billingPostcode = new_shopper.billingPostcode
+            shopper.cardNo = new_shopper.cardNo
+            shopper.expiration = new_shopper.expiration # expiration is only month and year and no ambiguity on century eg 12/24 not 12/2024
+            shopper.cvv = new_shopper.cvv
+
+            #update
+            shopper.save()
+            return redirect(reverse('stickerz:dashboard'))
+        else:
+            print("invalid shopping")
+            return print(shopper_form.errors)
+
+    response = render(request, 'stickerz/edit_billing.html', context={
+                                                            'shopper_form': shopper_form,
+                                                       })
+    return response
+
 
 def billing(request):
 
