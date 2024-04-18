@@ -5,8 +5,21 @@ from django.contrib.auth.models import User
 class CustomStickerForm(forms.ModelForm):
     #image = forms.ImageField()
     class Meta:
-        model = Shopper
-        fields = ('website', 'customSticker',)
+        model = Sticker
+        fields = ('image', )
+
+class CustomStickerOrderForm(forms.ModelForm):
+    CHOICES = (
+        ('matte', 'Matte'),
+        ('gloss', 'Gloss'),
+        ('semi-gloss', 'Semi-gloss'),
+        ('transparent', 'Transparent'),
+        ('holographic', 'Holographic'),
+    )
+    finish = forms.ChoiceField(choices=CHOICES)
+    class Meta:
+        model = Order
+        fields = ('finish', 'quantity', )
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())

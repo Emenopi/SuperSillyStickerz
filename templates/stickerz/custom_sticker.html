@@ -9,23 +9,31 @@
     <h1> Add your custom Sticker here! </h1>
     <div>
         <form id="custom_sticker_form" method="post" action="{% url 'stickerz:custom_sticker' %}" enctype="multipart/form-data">
-            <div class="upload-input">
-                <div class="upload-box" onclick="triggerFileInput()">
-                    <div class="upload-box-text">Upload photo</div>
-                </div>
-                <input type="file" class="file-input" onchange="displayPhoto(this)" accept="image/*">
-                <div class="uploaded-image-placeholder"></div>
-            </div>
-            
-            
+            {% csrf_token %}
 
-            <br><br>
-            <select id="size" name="size">
-                <option value="small">Small</option>
-                <option value="medium">Medium</option>
-                <option value="large">Large</option>
-            </select><br><br>
-            <input type="number" id="quantity" name="quantity" min="1" value="1" /><br><br>
+            {% for hidden in custom_sticker_form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            {% for field in custom_sticker_form.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field }}
+                <br>
+            {% endfor %}
+            <br>
+            {% csrf_token %}
+            {% for hidden in custom_sticker_order_form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            {% for field in custom_sticker_order_form.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field.name }}
+                {{ field }}
+                <br>
+            {% endfor %}
+            price = £2 each
+            <br> <br>
             <input type="submit" name="submit" value="Purchase" /><br><br>
         </form>
     </div>
