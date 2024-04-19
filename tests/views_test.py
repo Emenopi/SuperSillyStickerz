@@ -2,6 +2,7 @@ from django.test import TestCase, RequestFactory
 from django.urls import reverse
 from stickerz.models import Sticker
 from django.test.client import RequestFactory
+from django.contrib.auth.models import AnonymousUser
 class IndexViewTests(TestCase):
     def test_index_view_exits(self):
         """
@@ -55,7 +56,7 @@ class IndexViewTests(TestCase):
         # make request
         request = self.factory.get('/index/')
         # set user as logged out user
-        request.user = MockUser()
+        request.user = AnonymousUser()
         # get response
         response= self.client.get( "/stickerz/" )
         # check login link shows
