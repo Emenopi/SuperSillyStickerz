@@ -33,14 +33,11 @@ class CategoryMethodTests(TestCase):
 
         # get response
         request = self.factory.get('/customer/details')
+        
         response = sticker(request, WINDOW_CAT)
 
         #assert results
-        if title in str(response.content):
-            displays = True
-        else:
-            displays = False
-        self.assertEqual((displays), True)
+        self.assertContains(response, title) # asserts response contains title
 
     def test_calc(self):
         calc = Calculator()
