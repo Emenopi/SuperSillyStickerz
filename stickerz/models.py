@@ -3,6 +3,7 @@ from django.utils.text import slugify
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django_cryptography.fields import encrypt
+from django.core.validators import MinValueValidator
 
 class Sticker(models.Model):
     name = models.CharField(max_length=40)
@@ -62,7 +63,7 @@ class Order(models.Model):
     status = models.CharField(max_length=64)
     sticker = models.ForeignKey(Sticker, on_delete=models.CASCADE)
     finish = models.CharField(max_length=40)
-    quantity = models.IntegerField()
+    quantity = models.PositiveIntegerField(validators=[MinValueValidator(1)])
     timePlaced = models.DateTimeField(auto_now_add=True)
 
 

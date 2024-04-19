@@ -53,7 +53,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('status', models.CharField(max_length=64)),
                 ('finish', models.CharField(max_length=40)),
-                ('quantity', models.IntegerField()),
+                ('quantity', models.PositiveIntegerField()),
                 ('timePlaced', models.DateTimeField(auto_now_add=True)),
                 ('shopper', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='stickerz.Shopper')),
                 ('sticker', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='stickerz.Sticker')),
