@@ -61,4 +61,5 @@ class DashboardViewTests(TestCase):
         request.user = self.user
         response = dashboard(request)
         
-        self.assertContains(response, sticker_name)
+        expected = "<li>"+sticker_name+" - "+orders[0].timePlaced+"</li>"
+        self.assertContains(response, expected)
