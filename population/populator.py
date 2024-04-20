@@ -11,10 +11,8 @@ class Populator():
             table = self.data[table_name]
             for record in table:
                 for attr_name, attr_content in record.items():
-                    if attr_name == "user":
-                        print("    -",attr_name, attr_content.id)
                     setattr(instance, attr_name, attr_content)
-                print(" -",instance.id)
+                print(" -",instance)
                 instance.save()
         print("population complete")
                     
