@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from stickerz.models import Sticker, Shopper
 from population.reader import Reader
+from population.utils import find_dict_by_item, obj_to_dict
 import decimal
 import os
 
@@ -87,28 +88,17 @@ class StubReader(Reader):
         ]
         for index in range(len(order)):
             # replace names with real objects
-            userData = self.find_dict_by_item("username", order[index]["shopper"], self.get_user())
-            user = self.obj_to_dict(User(), userData)
+            userData = find_dict_by_item("username", order[index]["shopper"], self.get_user())
+            user = obj_to_dict(User(), userData)
 
-            shopperData = self.find_dict_by_item("user", user, self.get_shopper())
-            shopper = self.obj_to_dict(Shopper(), shopperData)
+            shopperData = find_dict_by_item("user", user, self.get_shopper())
+            shopper = obj_to_dict(Shopper(), shopperData)
             order[index]["shopper"] = shopper
             
-            stickerData = self.find_dict_by_item("name", order[index]["sticker"], self.get_sticker())
-            sticker = self.obj_to_dict(Sticker(), stickerData)
+            stickerData = find_dict_by_item("name", order[index]["sticker"], self.get_sticker())
+            sticker = obj_to_dict(Sticker(), stickerData)
             order[index]["sticker"] = sticker
         return order
-
-    def find_dict_by_item(self, attrName, attrContent, dict_list, ):
-        for dict in dict_list:
-            if dict[attrName] == attrContent:
-                return dict
-        return None
-    
-    def obj_to_dict(self, obj, dict):
-        for key, value in dict.items():
-                    setattr(obj, key, value)
-        return obj
     
     def get_user(self):
         user=[
@@ -170,8 +160,8 @@ class StubReader(Reader):
             ]
         for index in range(len(shopper)):
             # replace names with real objects
-            userData = self.find_dict_by_item("username", shopper[index]["user"], self.get_user())
-            user = self.obj_to_dict(User(), userData)
+            userData = find_dict_by_item("username", shopper[index]["user"], self.get_user())
+            user = obj_to_dict(User(), userData)
             shopper[index]["user"] = user
         return shopper
     
