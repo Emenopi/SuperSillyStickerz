@@ -5,6 +5,7 @@ application = get_wsgi_application()
 
 from population.populator import Populator
 from population.stub_reader import StubReader
+from population.csv_reader import CsvReader
 from stickerz.models import Sticker, Shopper, Order
 from django.contrib.auth.models import User
 
@@ -14,5 +15,5 @@ models = {
     "shopper" : Shopper,
     "order" : Order,
     }
-populator = Populator(StubReader(), models)
+populator = Populator(CsvReader(), models)
 populator.populate()
