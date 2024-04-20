@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
-from stickerz.models import Sticker
-from reader import Reader
+from stickerz.models import Sticker, Shopper
+from population.reader import Reader
 import decimal
 import os
 
@@ -60,15 +60,15 @@ class StubReader(Reader):
             },
         ]
         for index in range(len(sticker)):
-            sticker[index].image = os.path.join('sticker_images', sticker[index].image)
-            sticker[index].price = decimal.Decimal(float(sticker[index].price))
+            sticker[index]["image"] = os.path.join('sticker_images', sticker[index]["image"])
+            sticker[index]["price"] = decimal.Decimal(float(sticker[index]["price"]))
         return sticker
 
     def get_order(self):
         order=[
             {
                 "id" : 0,
-                "user" : "stickergal1",
+                "shopper" : "stickergal1",
                 "status" : "Processing",
                 "sticker" : "Window Cat",
                 "finish" : "holographic",
@@ -77,7 +77,7 @@ class StubReader(Reader):
             },
             {
                 "id" : 1,
-                "user" : "ilovestickers",
+                "shopper" : "ilovestickers",
                 "status" : "Delivered",
                 "sticker" : "David Tennant",
                 "finish" : "gloss",
@@ -87,13 +87,16 @@ class StubReader(Reader):
         ]
         for index in range(len(order)):
             # replace names with real objects
-            userData = self.find_dict_by_item("username", order[index]["user"], self.get_user())
+            userData = self.find_dict_by_item("username", order[index]["shopper"], self.get_user())
             user = self.obj_to_dict(User(), userData)
-            order[index]["user"] = user
+
+            shopperData = self.find_dict_by_item("user", user, self.get_shopper())
+            shopper = self.obj_to_dict(Shopper(), shopperData)
+            order[index]["shopper"] = shopper
             
             stickerData = self.find_dict_by_item("name", order[index]["sticker"], self.get_sticker())
-            user = self.obj_to_dict(Sticker(), stickerData)
-            order[index]["user"] = user
+            sticker = self.obj_to_dict(Sticker(), stickerData)
+            order[index]["sticker"] = sticker
         return order
 
     def find_dict_by_item(self, attrName, attrContent, dict_list, ):
