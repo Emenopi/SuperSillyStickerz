@@ -3,18 +3,22 @@ class Populator():
         self.models = models # {"table name" : Model,}
         self.data = reader.get_data() # {"table name" : [{"column name" : "column content"}]}
 
-    def populate(self):
-        print("# populating started")
+    def populate(self, verbose=True):
+        if verbose:
+            print("# populating started")
         for table_name, model in self.models.items():
-            print("##",table_name)
+            if verbose:
+                print("##",table_name)
             instance = model()
             table = self.data[table_name]
             for record in table:
                 for attr_name, attr_content in record.items():
                     setattr(instance, attr_name, attr_content)
-                print(" -",instance)
+                if verbose:
+                    print(" -",instance)
                 instance.save()
-        print("population complete")
+        if verbose:
+            print("population complete")
                     
 
         
