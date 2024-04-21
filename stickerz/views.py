@@ -18,7 +18,7 @@ def index(request, category=None):
 
     stickers = Sticker.objects.all()
     for sticker in stickers:
-        if sticker.category not in categories and sticker.category!="custom":
+        if sticker.category not in categories and sticker.category!="Custom":
             categories.append(sticker.category)
         
 
@@ -26,8 +26,8 @@ def index(request, category=None):
 
 
     # if no cateogory specified it is the homepage
-    if category == None:
-        context_dict['stickers'] = Sticker.objects.exclude(category="custom") # so users custom stickers arent availiable generally
+    if category == None or category == "Custom":
+        context_dict['stickers'] = Sticker.objects.exclude(category="Custom")# so users custom stickers arent availiable generally
     else:
         context_dict['stickers'] = Sticker.objects.filter(category=category)
     

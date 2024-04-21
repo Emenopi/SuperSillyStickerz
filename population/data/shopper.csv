@@ -1,0 +1,4 @@
+﻿id,user,shippingFName,shippingLName,shippingAddress,shippingCountry,shippingPostcode,billingFName,billingLname,billingAddress,billingCountry,billingPostcode,cardNo,exp,cvv
+0,stickergal1,sticker,gal,123 sticker st,Belgium,BE12 1GM,sticker,gal,123 sticker st,Belgium,BE12 1GM,1234567812341230,0924,123
+1,ilovestickers,sticker,crazy,47 crazy rd,France,PA92 7RS,sticker,crazy,47 crazy rd,France,PA92 7RS,8475927465937480,0527,485
+2,bellaisgroovy,Bella,Hodgson,37 street,Country,P05T C0D,Bella,Hodgson,37 street,Country,P05T C0D,1234123412341234,1234,123

@@ -25,8 +25,6 @@ class Shopper(models.Model):
     # Links UserProfile to a User model instance.
     # includes username, password, email, firstname, & lastname
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    website = models.URLField(blank=True)
-    customSticker = models.ImageField(upload_to='custom_sticker_images', blank=True)
 
     # primary key ID is built in
 
