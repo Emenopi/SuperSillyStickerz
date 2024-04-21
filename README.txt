@@ -1,3 +1,19 @@
+Introduction
+
+'Super Silly Stickerz' is a website that sells pre-made and customisable stickers. It allows users to login, browse, customise, and purchase stickers.
+
+The home page displays all pre-made stickers which can be filtered by categories which appear in the sidebar.
+
+Once the user has chosen a sticker they wish to purchase, they can then choose the finish of the sticker from the available options, and the quantity they wish to purchase.
+
+There is also an option to buy custom stickers. This functionality allows users to make a unique sticker by uploading an image. Users can also select finish and quantity for custom stickers.
+
+In order to purchase a sticker, the user must have an account and be logged in.
+
+There is also a dashboard page where users can view their order history and view/edit their shipping and billing information.
+
+
+
 # Retrospective 18/04/2024:
 
 ## Wind - What helped us
