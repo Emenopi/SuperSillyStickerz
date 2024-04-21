@@ -34,9 +34,8 @@ class Sticker_model_tests(TestCase):
 
 
     def test_invalid_stickers_dont_get_created(self):
-        sticker, created = Sticker.objects.get_or_create(**self.invalid_sticker_data)
-        self.assertFalse(created)
-        #this is currently failing 
+        with self.assertRaises(ValueError):
+            sticker, created = Sticker.objects.get_or_create(**self.invalid_sticker_data)
 
 
     def test_free_stickers_can_be_created(self):
