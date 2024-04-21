@@ -12,6 +12,8 @@ class Sticker(models.Model):
     sticker_slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
+        if self.price < 0:
+            raise ValueError("Price cannot be negative")
         self.sticker_slug = slugify(self.name)
         super(Sticker, self).save(*args, **kwargs)
         # Modified save function to update sticker_slug to be the slugified name of the sticker
@@ -23,8 +25,6 @@ class Shopper(models.Model):
     # Links UserProfile to a User model instance.
     # includes username, password, email, firstname, & lastname
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    website = models.URLField(blank=True)
-    customSticker = models.ImageField(upload_to='custom_sticker_images', blank=True)
 
     # primary key ID is built in
 
