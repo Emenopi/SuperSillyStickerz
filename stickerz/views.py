@@ -103,6 +103,9 @@ def dashboard(request):
     context_dict['orders'] = orders 
     
     response = render(request, 'stickerz/dashboard.html', context=context_dict)
+    response_array = response.content.decode("utf-8").split("\n")
+    for line in response_array:
+        print(line)
     return response
 
 def edit_billing(request):
