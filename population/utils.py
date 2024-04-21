@@ -4,7 +4,7 @@ def find_dict_by_item(attrName, attrContent, dict_list, ):
                 return dict
         return None
     
-def obj_to_dict(obj, dict):
+def dict_to_obj(obj, dict):
     for key, value in dict.items():
                 setattr(obj, key, value)
     return obj
