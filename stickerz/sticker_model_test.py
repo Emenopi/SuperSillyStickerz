@@ -29,6 +29,8 @@ class Sticker_model_tests(TestCase):
         self.assertEqual(sticker.price, self.valid_sticker_data["price"])
         self.assertEqual(sticker.category, self.valid_sticker_data["category"])
         self.assertEqual(sticker.sticker_slug, "test-1")
+        #return string should be set to the name of the sticker
+        self.assertEqual(sticker.__str__(), "test 1")
 
 
     def test_invalid_stickers_dont_get_created(self):
@@ -44,4 +46,4 @@ class Sticker_model_tests(TestCase):
         self.assertEqual(sticker.price, self.free_sticker_data["price"])
 
 
-    
+        
