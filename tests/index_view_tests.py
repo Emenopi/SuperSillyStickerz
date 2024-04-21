@@ -1,8 +1,4 @@
-from unittest import mock
-from django.core.files import File
 from django.test import TestCase, RequestFactory
-from django.urls import reverse
-from django.conf import settings
 from unittest.mock import patch
 from django.utils.text import slugify
 from stickerz.models import Sticker
