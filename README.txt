@@ -22,6 +22,30 @@ The User class is another built in class that we use because because it is integ
 
 Our populations script uses a Populate class. This class has a reader which must be an implementation of the Reader interface. This means that we can easily switch the reader that Populate uses at runtime. This is an example of the strategy design pattern. One concrete benefit of this is we can use a StubReader for testing so that we don't slow down tests with the file handling done by CsvReader.
 
+# Usage
+
+Create a python 3.10 environemnt, install listed extensions, open root directory, and run `$python manage.py runserver`.
+
+If you need assistance just ask.
+
+asgiref==3.8.1
+cffi==1.16.0
+cryptography==42.0.5
+Django==2.2
+django-appconf==1.0.6
+django-cryptography==1.1
+django-registration-redux==2.2
+pillow==10.2.0
+pycparser==2.22
+pycryptodome==3.20.0
+python-dateutil==2.9.0.post0
+pytz==2024.1
+six==1.16.0
+sqlparse==0.4.4
+typing_extensions==4.10.0
+
+
+
 # Retrospective 18/04/2024:
 
 ## Wind - What helped us
