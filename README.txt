@@ -1,4 +1,4 @@
-Introduction
+# Introduction
 
 'Super Silly Stickerz' is a website that sells pre-made and customisable stickers. It allows users to login, browse, customise, and purchase stickers.
 
@@ -12,7 +12,15 @@ In order to purchase a sticker, the user must have an account and be logged in.
 
 There is also a dashboard page where users can view their order history and view/edit their shipping and billing information.
 
+# Architecture
 
+UML diagrams are located in the UML directory.
+
+This project uses the Django framework and heavily relies on its architecture. The classes which represent our database tables are based on Django's Model class. There is an Order class that keeps track of orders a user has placed. Each order has a Shopper and a Sticker in it. It also has a finish attribute so that each sticker does not need a seperate object for each finish of the same design (eg gloss cat, matte cat, holographic cat).
+
+The User class is another built in class that we use because because it is integrated with a built in user registration system. To keep this functionality, instead of extending User, each instance of our Shopper class has an instance of User. This also means that in the future we could switch to a different registration system by using an adapter with an interface matching User's.
+
+Our populations script uses a Populate class. This class has a reader which must be an implementation of the Reader interface. This means that we can easily switch the reader that Populate uses at runtime. This is an example of the strategy design pattern. One concrete benefit of this is we can use a StubReader for testing so that we don't slow down tests with the file handling done by CsvReader.
 
 # Retrospective 18/04/2024:
 
