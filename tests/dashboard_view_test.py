@@ -63,3 +63,44 @@ class DashboardViewTests(TestCase):
         
         expected = "<li>"+sticker_name+" - "+orders[0].timePlaced+"</li>"
         self.assertContains(response, expected)
+
+    @patch('stickerz.models.Shopper.objects.get')
+    @patch('stickerz.models.Order.objects.filter')
+    def test_dashboardView_mockShopper_dataDisplayed(self, mock_order_filter, mock_shopper):
+
+        shopper = Shopper( 
+            user = self.user, 
+
+            shippingFName = 'Emily', 
+            shippingLName = 'Holt',  
+            shippingAddress = '1 Street Street', 
+            shippingCountry = 'United Kingdom', 
+            shippingPostcode = 'AB12 3CD', 
+
+            billingFName = 'Emily', 
+            billingLName = 'Holt', 
+            billingAddress = '1 Street Street', 
+            billingCountry = 'United Kingdom', 
+            billingPostcode = 'AB12 3CD', 
+        )
+
+        mock_shopper.return_value = shopper
+        mock_order_filter.return_value = [Order()]
+
+        request = self.factory.get("/dashboard/")
+        request.user = self.user
+        response = dashboard(request)
+
+        expected = """    <h2>Shipping Address</h2>
+    <p>Emily Holt</p>
+    <p>1 Street Street</p>
+    <p>United Kingdom</p>
+    <p>AB12 3CD</p>
+
+    <h2>Billing Address</h2>
+    <p>Emily Holt</p>
+    <p>1 Street Street</p>
+    <p>United Kingdom</p>
+    <p>AB12 3CD</p>""" # format needs to be like this so test passes
+
+        self.assertContains(response, expected)
