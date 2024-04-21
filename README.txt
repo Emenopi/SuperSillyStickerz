@@ -44,8 +44,6 @@ six==1.16.0
 sqlparse==0.4.4
 typing_extensions==4.10.0
 
-
-
 # Retrospective 18/04/2024:
 
 ## Wind - What helped us
