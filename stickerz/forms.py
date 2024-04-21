@@ -2,27 +2,29 @@ from django import forms
 from stickerz.models import Sticker, Shopper, Order
 from django.contrib.auth.models import User
 
-class CustomStickerForm(forms.ModelForm):
-    #image = forms.ImageField()
-    class Meta:
-        model = Sticker
-        fields = ('image', )
-
-class CustomStickerOrderForm(forms.ModelForm):
-    CHOICES = (
+FINISHES = (
         ('matte', 'Matte'),
         ('gloss', 'Gloss'),
         ('semi-gloss', 'Semi-gloss'),
         ('transparent', 'Transparent'),
         ('holographic', 'Holographic'),
     )
-    finish = forms.ChoiceField(choices=CHOICES)
+
+class CustomStickerForm(forms.ModelForm):
+    class Meta:
+        model = Sticker
+        fields = ('image', )
+
+class CustomStickerOrderForm(forms.ModelForm):
+    finish = forms.ChoiceField(choices=FINISHES)
+
     class Meta:
         model = Order
         fields = ('finish', 'quantity', )
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
+
     class Meta:
         model = User
         fields = ('username', 'password',)
@@ -46,15 +48,9 @@ class ShopperForm(forms.ModelForm):
                   'expiration', 'cvv')
 
 class OrderForm(forms.ModelForm):
-    CHOICES = (
-        ('matte', 'Matte'),
-        ('gloss', 'Gloss'),
-        ('semi-gloss', 'Semi-gloss'),
-        ('transparent', 'Transparent'),
-        ('holographic', 'Holographic'),
-    )
-    finish = forms.ChoiceField(choices=CHOICES)
+    finish = forms.ChoiceField(choices=FINISHES)
     quantity = forms.IntegerField(widget=forms.NumberInput(attrs={'min': '1'}))
+    
     class Meta:
         model = Order
         fields = ('finish', 'quantity')
