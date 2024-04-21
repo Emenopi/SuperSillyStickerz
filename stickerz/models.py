@@ -12,6 +12,8 @@ class Sticker(models.Model):
     sticker_slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
+        if self.price < 0:
+            raise ValueError("Price cannot be negative")
         self.sticker_slug = slugify(self.name)
         super(Sticker, self).save(*args, **kwargs)
         # Modified save function to update sticker_slug to be the slugified name of the sticker
