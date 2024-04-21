@@ -54,6 +54,7 @@ class OrderForm(forms.ModelForm):
         ('holographic', 'Holographic'),
     )
     finish = forms.ChoiceField(choices=CHOICES)
+    quantity = forms.IntegerField(widget=forms.NumberInput(attrs={'min': '1'}))
     class Meta:
         model = Order
         fields = ('finish', 'quantity')
