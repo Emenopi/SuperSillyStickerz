@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from stickerz.models import Sticker, Shopper
 from population.reader import Reader
-from population.utils import find_dict_by_item, obj_to_dict
+from population.utils import find_dict_by_item, dict_to_obj
 import decimal
 import csv
 import os
@@ -36,14 +36,14 @@ class CsvReader(Reader):
 
             # replace names with real objects
             userData = find_dict_by_item("username", order[index]["shopper"], self.get_user())
-            user = obj_to_dict(User(), userData)
+            user = dict_to_obj(User(), userData)
 
             shopperData = find_dict_by_item("user", user, self.get_shopper())
-            shopper = obj_to_dict(Shopper(), shopperData)
+            shopper = dict_to_obj(Shopper(), shopperData)
             order[index]["shopper"] = shopper
             
             stickerData = find_dict_by_item("name", order[index]["sticker"], self.get_sticker())
-            sticker = obj_to_dict(Sticker(), stickerData)
+            sticker = dict_to_obj(Sticker(), stickerData)
             order[index]["sticker"] = sticker
         return order
 
@@ -60,7 +60,7 @@ class CsvReader(Reader):
 
             # replace names with real objects
             userData = find_dict_by_item("username", shopper[index]["user"], self.get_user())
-            user = obj_to_dict(User(), userData)
+            user = dict_to_obj(User(), userData)
             shopper[index]["user"] = user
         return shopper
     
