@@ -26,6 +26,8 @@ Our populations script uses a Populate class. This class has a reader which must
 
 Create a python 3.10 environemnt, install listed extensions, open root directory, and run `$python manage.py runserver`.
 
+To run a test use `python manage.py test tests.NAME_OF_TEST`
+
 If you need assistance just ask.
 
 asgiref==3.8.1
