@@ -29,10 +29,13 @@ Our populations script uses a Populate class. This class has a reader which must
  - https://github.com/Emenopi/SuperSillyStickerz/blob/main/stickerz/forms.py
 
 # Doubling Tests
+ - The mocks all make use of a patch decorator to set the return value of call inside the decorator.
  - https://github.com/Emenopi/SuperSillyStickerz/blob/main/tests/dashboard_view_test.py
  - https://github.com/Emenopi/SuperSillyStickerz/blob/main/tests/index_view_tests.py
- - https://github.com/Emenopi/SuperSillyStickerz/blob/main/tests/populate_stickerz_test.py
  - https://github.com/Emenopi/SuperSillyStickerz/blob/main/tests/sticker_view_tests.py
+
+ - This stub switches out the reader used from CsvReader to StubReader as Populate uses the strategy design pattern. This reduces file handling and speeds up testing.
+ - https://github.com/Emenopi/SuperSillyStickerz/blob/main/tests/populate_stickerz_test.py
 
 # Usage
 
