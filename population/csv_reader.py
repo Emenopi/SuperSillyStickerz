@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from stickerz.models import Sticker, Shopper
 from population.reader import Reader
-from population.utils import find_dict_by_item, dict_to_obj
+from population.utils import create_obj_by_attr
 import decimal
 import csv
 import os
@@ -34,16 +34,11 @@ class CsvReader(Reader):
         for index in range(len(order)):
             order[index]["id"] = int(order[index]["id"])
 
-            # replace names with real objects
-            userData = find_dict_by_item("username", order[index]["shopper"], self.get_user())
-            user = dict_to_obj(User(), userData)
-
-            shopperData = find_dict_by_item("user", user, self.get_shopper())
-            shopper = dict_to_obj(Shopper(), shopperData)
+            user = create_obj_by_attr("username", order[index]["shopper"],  self.get_user(), User())
+            shopper = create_obj_by_attr("user", user,  self.get_shopper(), Shopper())
             order[index]["shopper"] = shopper
-            
-            stickerData = find_dict_by_item("name", order[index]["sticker"], self.get_sticker())
-            sticker = dict_to_obj(Sticker(), stickerData)
+    
+            sticker = create_obj_by_attr("name", order[index]["sticker"],   self.get_sticker(), Sticker())
             order[index]["sticker"] = sticker
         return order
 
@@ -58,9 +53,7 @@ class CsvReader(Reader):
         for index in range(len(shopper)):
             shopper[index]["id"] = int(shopper[index]["id"])
 
-            # replace names with real objects
-            userData = find_dict_by_item("username", shopper[index]["user"], self.get_user())
-            user = dict_to_obj(User(), userData)
+            user = create_obj_by_attr("username", shopper[index]["user"],   self.get_user(),User())
             shopper[index]["user"] = user
         return shopper
     
