@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from stickerz.models import Sticker, Shopper
 from population.reader import Reader
-from population.utils import find_dict_by_item, dict_to_obj, create_obj_by_attr
+from population.utils import create_obj_by_attr
 import decimal
 import csv
 import os
