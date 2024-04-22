@@ -20,7 +20,7 @@ This project uses the Django framework and heavily relies on its architecture. T
 
 The User class is another built in class that we use because because it is integrated with a built in user registration system. To keep this functionality, instead of extending User, each instance of our Shopper class has an instance of User. This also means that in the future we could switch to a different registration system by using an adapter with an interface matching User's.
 
-Our populations script uses a Populate class. This class has a reader which must be an implementation of the Reader interface. This means that we can easily switch the reader that Populate uses at runtime. This is an example of the strategy design pattern. One concrete benefit of this is we can use a StubReader for testing so that we don't slow down tests with the file handling done by CsvReader.
+Our populations script uses a Populate class. This class has a reader which must be an implementation of the Reader interface and return a dictionary of tables with get_data(). This means that we can easily switch the reader that Populate uses at runtime. This is an example of the strategy design pattern. One concrete benefit of this is we can use a StubReader for testing so that we don't slow down tests with the file handling done by CsvReader.
 
 # Clean Code Examples
  - https://github.com/Emenopi/SuperSillyStickerz/blob/main/population/populator.py
