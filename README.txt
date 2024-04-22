@@ -22,6 +22,18 @@ The User class is another built in class that we use because because it is integ
 
 Our populations script uses a Populate class. This class has a reader which must be an implementation of the Reader interface. This means that we can easily switch the reader that Populate uses at runtime. This is an example of the strategy design pattern. One concrete benefit of this is we can use a StubReader for testing so that we don't slow down tests with the file handling done by CsvReader.
 
+# Clean Code Examples
+ - https://github.com/Emenopi/SuperSillyStickerz/blob/main/population/populator.py
+ - https://github.com/Emenopi/SuperSillyStickerz/blob/main/population/stub_reader.py
+ - https://github.com/Emenopi/SuperSillyStickerz/blob/main/stickerz/models.py
+ - https://github.com/Emenopi/SuperSillyStickerz/blob/main/stickerz/forms.py
+
+# Doubling Tests
+ - https://github.com/Emenopi/SuperSillyStickerz/blob/main/tests/dashboard_view_test.py
+ - https://github.com/Emenopi/SuperSillyStickerz/blob/main/tests/index_view_tests.py
+ - https://github.com/Emenopi/SuperSillyStickerz/blob/main/tests/populate_stickerz_test.py
+ - https://github.com/Emenopi/SuperSillyStickerz/blob/main/tests/sticker_view_tests.py
+
 # Usage
 
 Create a python 3.10 environemnt, install listed extensions, open root directory, and run `$ python manage.py runserver`.
